@@ -1,0 +1,11 @@
+#Largertext{
+    color: rgba(21, 184, 21, 0.773);
+    font-family: Verdana;    
+}
+.Smallertext{
+    color: darkgreen;
+    font-family: Verdana;
+}
+body {
+    background-color: lightblue
+}
