@@ -1,12 +1,8 @@
-var player_x = 300;
-var player_y = 100;
-var mousex = -100
-var mousey = -100
-var obstacle_x1 = 10
-var obstacle_y1 = 250
-var obstacle_x2 = 150
-var obstacle_y2 = 150
-
+var my_x = [300, -100, 10, 150]
+var my_y = [100, -100, 250, 150]
+var myObjectsX = [[40, 20, 60], [140, 120, 160], [240, 220, 260]]
+var myObjectsY = [20, 70]
+var myColors = [[199, 40, 111], [168, 12, 56], [232, 5, 115]]
 
 function setup() {
 
@@ -18,13 +14,15 @@ function draw() {
 
     fill(150, 10, 60)
 
-    createPlayer(player_x, player_y, 20)
+    createPlayer(my_x[0], my_y[0], 20)
 
     movePlayer()
 
     createExit()
 
-    createObstacles(obstacle_x1, obstacle_y1, obstacle_x2, obstacle_y2);
+    createObstacles(my_x[2], my_y[2], my_x[3], my_y[3]);
+
+    createObjects()
 
     createBorders()
 
@@ -34,6 +32,19 @@ function draw() {
 
     moveObstacles()
 
+    Count()
+}
+function createObjects() {
+    for(i = 0; i < 3; i += 1) {
+        fill(myColors[i][0], myColors[i][1], myColors[i][2]);
+        triangle(myObjectsX[i][0], myObjectsY[0], myObjectsX[i][1], myObjectsY[1], myObjectsX[i][2], myObjectsY[1]);
+    }
+}
+
+function Count() {
+    for(i = 1; i <= 10; i++) {
+        console.log(i)
+    }
 }
 
 function keyPressed() {
@@ -43,27 +54,27 @@ function createPlayer(pX, pY, diameter) {
     circle(pX, pY, diameter)
 }
 function movePlayer() {
-    if (keyIsDown(68) && player_x < 380) {
-        player_x += 2
+    if (keyIsDown(68) && my_x[0] < 380) {
+        my_x[0] += 2
     }
-    if (keyIsDown(65) && player_x > 20) {
-        player_x -= 2
+    if (keyIsDown(65) && my_x[0] > 20) {
+        my_x[0] -= 2
     }
 
-    if (keyIsDown(87) && player_y > 20) {
-        player_y -= 2
+    if (keyIsDown(87) && my_y[0] > 20) {
+        my_y[0] -= 2
     }
-    if (keyIsDown(83) && player_y < 380) {
-        player_y += 2
+    if (keyIsDown(83) && my_y[0] < 380) {
+        my_y[0] += 2
     }
 }
 function createObject() {
     fill(0)
-    circle(mousex, mousey, 30)
+    circle(my_x[1], my_y[1], 30)
 }
 function mousePressed() {
-    mousex = mouseX;
-    mousey = mouseY;
+    my_x[1] = mouseX;
+    my_y[1] = mouseY;
 }
 
 
@@ -76,14 +87,14 @@ function createObstacles(ob_x1, ob_y1, ob_x2, ob_y2) {
     rect(ob_x2, ob_y2, 250, 40)
 }
 function moveObstacles() {
-    if (obstacle_x1 < 140)
-        obstacle_x1 += 1
-    if (obstacle_x1 >= 140)
-        obstacle_x1 = 10
-    if (obstacle_x2 > 10)
-        obstacle_x2 -= 1
-    if (obstacle_x2 <= 10)
-        obstacle_x2 = 150
+    if (my_x[2] < 140)
+        my_x[2] += 1
+    if (my_x[2] >= 140)
+        my_x[2] = 10
+    if (my_x[3] > 10)
+        my_x[3] -= 1
+    if (my_x[3] <= 10)
+        my_x[3] = 150
 }
 function createBorders() {
     fill(120, 0, 120)
@@ -96,14 +107,14 @@ function createBorders() {
 }
 function createExit() {
     fill(10, 200, 100)
-    rect(0, 290, 40, 70)
-    if (keyIsDown(65) && player_y > 300 && player_y < 350 && player_x <= 20) {
-        player_x -= 2
+    rect(0, 290, 10, 70)
+    if (keyIsDown(65) && my_y[0] > 300 && my_y[0] < 350 && my_x[0] <= 20) {
+        my_x[0] -= 2
     }
 }
 
 function textWin() {
-    if (player_x < 0) {
+    if (my_x[0] < 0) {
         fill(0, 100, 200)
         textSize(20)
         text("You Win!", 155, 100)
